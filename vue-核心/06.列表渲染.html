@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <ul>
+      <li v-for="(item,index) in persons" :key="item.id">
+        {{item.index}} -- {{item.name}} -- {{item.age}}
+        <button @click="deleteP(index)">删除</button>
+        <button @click="updataP(index,{id:'07',name:'ggo',age:32})">更新</button>
+      </li>
+    </ul>
+    <!-- 遍历对象的时候，v-for的key可以使用对象的属性名来设置，因为在对象中属性名是不可以重复的 -->
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    new Vue({
+      el:'#app',
+      data: {
+        persons:[
+          {id:'01',name:'ruoyan',age:18},
+          {id:'02',name:'changge',age:16},
+          {id:'03',name:'feiyu',age:33},
+          {id:'04',name:'ziwan',age:22},
+          {id:'05',name:'qingcha',age:50},
+        ]
+      },
+      methods:{
+        deleteP(index){
+          this.persons.splice(index,1)
+        },
+        updataP(index,newP){
+          // vue中将vm管理的对象，都设置了get和set方法，但是对于数组并没有set和get，而是重新了几个可以改变数组的方式
+          this.persons.splice(index,1,newP)
+          // this.persons[index] = newP
+        }
+      }
+    })
+  </script>
+</body>
+</html>

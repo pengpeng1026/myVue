@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model="searchName" placeholder="查找名称">
+    <ul>
+      <li v-for="(item,index) in filterPerson" :key="item.id">
+        {{index+1}} -- {{item.name}} -- {{item.age}} 
+      </li>
+      <button @click='soreType=1'>年龄升序</button>
+      <button @click='soreType=2'>年龄降序</button>
+      <button @click='soreType=0'>原本顺序</button>
+    </ul>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    new Vue({
+      el:'#app',
+      data: {
+        searchName:'',
+        soreType:0 , //0不排序 1升序 2降序
+        persons:[
+          {id:'01',name:'joe',age:22},
+          {id:'02',name:'tom',age:14},
+          {id:'03',name:'jerry',age:30},
+          {id:'04',name:'jack',age:32},
+          {id:'05',name:'rose',age:50},
+          {id:'06',name:'poal',age:28},
+          {id:'07',name:'vue',age:17},
+          {id:'08',name:'react',age:63},
+        ]
+      },
+      computed:{
+        filterPerson(){
+          const{searchName,persons,soreType} = this
+          const arr = persons.filter(p => {
+            return p.name.includes(searchName)
+          })
+          if(soreType != 0){
+            if(soreType == 1){
+              arr.sort((item1,item2) => {
+                return item1.age- item2.age
+              })
+            }else{
+              arr.sort((item1,item2) => {
+                return item2.age - item1.age
+                
+              })
+            }
+          }
+          return arr
+        }
+      }
+    })
+  </script>
+</body>
+</html>

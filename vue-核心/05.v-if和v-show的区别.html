@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h2 v-if='ok'>成功</h2>
+    <h2 v-else>失败</h2>
+    <h3 v-show='ok'>well done</h3>
+    <h3 v-show='!ok'>bad news</h3>
+    <button @click="toggle">ding</button>
+    <!-- v-if和v-show的区别：v-if对于不需要展示的标签是直接删除了，节省了内存，需要展示的话再创建
+        v-show对于不需要的标签是通过样式display:none来隐藏，
+        这两种方式的区别在于，如果需要频繁的显示隐藏使用v-show性能好些，其他的话一般差不多
+    -->
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    new Vue({
+      data(){
+        return {
+          ok:true
+        }
+      },
+      methods:{
+        toggle(){
+          this.ok =!this.ok;
+        }
+      }
+    }).$mount('#app');
+  </script>
+</body>
+</html>

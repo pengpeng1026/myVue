@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /* 
+    promise解决异步回调地狱，本身是一个构造函数，需要new实例化来使用
+    */
+    const p = new Promise((resolve, reject) => {
+      // 模拟异步
+      setTimeout(() => {
+        const time = Date.now();
+        if(time % 2 == 1){
+          resolve('成功的Promise')
+          // throw 999
+        }else{
+          reject('失败的promise')
+        }
+      },1000)
+    })
+    /* 如果不想写。catch可以在.then回调里面写reason，是处理失败的回调，作用和.catch一样
+      .then或者.catch如果没有返回值，则返回的promise对象的值是undefined，所以要写返回值
+    */
+    /* .then(value => {
+      console.log(value);
+      return value
+    },reason => {
+      console.log(reason);
+      return reason
+    }) */
+    
+    console.log(p);
+    /* then返回的promise的结果状态如何判断?
+      简洁表达: 由then指定回调函数的执行结果
+      详细表达: 4种情况
+        情况1: 抛出错误  ==> 失败, reason为抛出的错误
+        情况2: 返回一个失败的promise  ==> 失败, reason为就失败的promise的reason
+        情况3: 返回一个成功的promise  ==> 成功, vlaue为就成功的promise的value
+        情况4: 返回非promise对象值 */
+    p.then(value => {
+      console.log(value);
+      // return 180
+      // throw new Error('Error')
+      console.log(vallue);
+    },reason => {
+      console.log(reason);
+      return reason
+    }).then(value => {
+      console.log(value);
+    },reason => {
+      console.log(reason);
+      // return reason
+    })
+    
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 需求，fullName由firstName和lastName组成，两边都要响应式更新 -->
+  <script>
+    const p = {
+      firstName:'xiao',
+      lastName:'peng',
+    }
+    Object.defineProperty(p,'fullName',{
+      /* get（）当读取对象的属性的时候会调用该函数，this是该方法所属的对象，将执行的返回值作为添加的属性名的值 */
+      get(){
+        return this.firstName + "-" + this.lastName;
+      },
+      /* set()设置属性值的时候调用，this也是该方法所属的对象，参数传入一个value,是设置的值，用来监视属性值的变化 */
+      set(value){
+        console.log('-----',value);
+        const names = value.split('-')
+        this.firstName = names[0]
+        this.lastName = names[1]
+      }
+    })
+    console.log(p.fullName);
+    p.fullName = 'lu-han'
+    console.log(p);
+    
+  </script>
+</body>
+</html>

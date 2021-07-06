@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 使用axios之前先引入，客户端可以bootcdn引入，服务端用npm安装 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script>
+      // 请求拦截器，在请求之前，先处理拦截器中的，携带token或者设置请求头
+      /* 
+    config：是发送请求时设置的配置信息，比如请求头，请求路径，方式等，最后必须返回这个config，否则视为取消请求
+     */
+      axios.interceptors.request.use((config) => {
+        console.log(config);
+        return config;
+      });
+      axios({
+        url: "https://api.github.com/search/users",
+        method: "get",
+        params: {
+          q: "pengpeng1026",
+        },
+      })
+        .then((value) => {
+          console.log(value);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      姓：<input type="text" v-model="firstName" /><br />
+      名：<input type="text" v-model="lastName" /><br />
+      姓名（单向）：<input type="text" v-model="fullName" /><br />
+      <!-- 姓名（双向）：<input type="text" v-model='fullName3'><br> -->
+    </div>
+    <script src="./js/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          firstName: "xiao",
+          lastName: "peng",
+          fullName: "",
+        },
+        // 计算属性的get只能同步回调操做，无法实现异步的
+        /* computed: {
+        fullName:{
+          get(){
+            return this.firstName + "-" + this.lastName;
+          },
+        },
+        fullName3:{
+          get(){
+            return this.firstName + "-" + this.lastName;
+          },
+          set(value){
+            // console.log(value);
+            const names = value.split('-')
+            this.firstName = names[0]
+            this.lastName = names[1]
+          }
+        }
+      } */
+        // watch方法可以实现异步，监听值的改变的时候有两种写法，第一种比较简单，但是第一次不会执行，只会监视数据的改变
+        // 如果需要第一次就执行的话，可以用第二种方法
+        watch: {
+          /* // 监听firstName
+        firstName(value){
+          this.fullName = value + '-' + this.lastName
+        },
+        // 监听lastName
+        lastName(value){
+          this.fullName = this.firstName + "-" + value
+        } */
+          firstName: {
+            handler(value) {
+              this.fullName = value + "-" + this.lastName;
+            },
+            immediate: true,
+          },
+          lastName: {
+            handler(value) {
+              this.fullName = this.firstName + "-" + value
+            },
+            immediate: true
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

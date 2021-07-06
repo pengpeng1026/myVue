@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 1插值 -->
+    <p>{{msg}}</p>
+
+    <!-- 2强制绑定 -->
+    <a href="url">百度一下，你就知道</a> <!-- 此时没有绑定url，而是一个字符串 -->
+    <a v-bind:href="url">百度一下，你就知道</a><!-- 动态绑定属性，此时的url不再是一个字符串，而是变量 -->
+    <a :href="url">百度一下，你就知道</a> <!-- 简写方式 -->
+
+    <!-- 绑定事件监听 -->
+    <button v-on:click="handleClick">ding</button>
+    <button @click="handleClick">ding</button><!-- 简写方式 -->
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    new Vue({
+      el:'#app',
+      data:{
+        msg:'Hello',
+        url:'http://www.baidu.com'
+      },
+      methods:{
+        handleClick(event){
+          alert(event.target.innerHTML)
+        }
+      }
+    })
+  </script>
+</body>
+</html>

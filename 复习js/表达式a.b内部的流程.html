@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 表达式a.b内部的流程
+    /* 首先按照作用域链查找变量a,如果没有找到则报错，a is not defined
+       如果找到了，判断a的数据类型
+        null/undefined: Cannot read property 'b' of null at
+        string/number/boolean: 先将基本类型转换成对应的包装类，再去读取属性b,如果没有的话
+          返回undefined
+        引用类型的对象：读取属性b，如果没有的话返回undefined
+    */
+    // var a = null
+    // console.log(a.b);
+    var a = 'str'
+    console.log(a.b);
+  </script>
+</body>
+</html>

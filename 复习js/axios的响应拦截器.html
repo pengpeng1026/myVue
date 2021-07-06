@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 使用axios之前先引入，客户端可以bootcdn引入，服务端用npm安装 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script>
+      axios.interceptors.response.use(
+        (response) => {
+          // 2xx 范围内的状态码都会触发该函数。
+          console.log(response);
+          return response.data;
+        },
+        (err) => {
+          // 超出 2xx 范围的状态码都会触发该函数。
+          // 对响应错误做点什么
+          console.log(err);
+          return Promise.reject(err);
+        }
+      );
+      axios({
+        url: "https://api.github.com/search/users",
+        method: "get",
+        params: {
+          q: "pengpeng1026",
+        },
+      })
+        .then((value) => {
+          console.log(value);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      姓：<input
+        type="text"
+        placeholder="firstName"
+        v-model="firstName"
+      /><br />
+      名：<input type="text" placeholder="lastName" v-model="lastName" /><br />
+      姓名(单向绑定)：<input
+        type="text"
+        placeholder="fullName"
+        v-model="fullName"
+      /><br />
+      姓名(双向绑定)：<input
+        type="text"
+        placeholder="fullName2"
+        v-model="fullName2"
+      />
+      <p>my name is {{firstName}}-{{lastName}}</p>
+    </div>
+    <script src="./js/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data() {
+          return {
+            firstName: "peng",
+            lastName: "guang",
+            // fullName:'pengguang'
+          };
+        },
+        computed: {
+          fullName() {
+            return this.firstName + "-" + this.lastName;
+          },
+          /* fullName2(){
+            return (this.firstName + '-' + this.lastName)
+          }, */
+          fullName2: {
+            // 相当于监视了firstName和lastName
+            get() {
+              return this.firstName + "-" + this.lastName;
+            },
+            // 相当于监视了fullName
+            set(value) {
+              // console.log(value);
+              const names = value.split('-')
+              this.firstName = names[0]
+              this.lastName = names[1]
+            },
+          },
+        },
+        // 监听器
+        watch: {
+          firstName(value) {
+            this.fullName2 = value + "-" + this.lastName;
+          },
+          lastName(value) {
+            this.fullName2 = this.firstName + "-" + value;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
