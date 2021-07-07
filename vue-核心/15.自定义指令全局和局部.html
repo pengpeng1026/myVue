@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="demo1">
+    <p v-text="msg"></p>
+    <p v-upper-text="msg"></p>
+    <p v-lower-text="msg"></p>
+  </div>
+  <!-- 局部定义的自定义指令没有在这里生效 -->
+  <div id="demo2">
+    <p v-upper-text="news"></p>
+    <p v-lower-text="news"></p>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    // 定义全局的自定义指令
+    Vue.directive('upper-text',(el,binding) =>{
+      console.log(el,binding);
+      el.innerHTML = binding.value.toUpperCase();
+    })
+    new Vue({
+      el:'#demo1',
+      data: {
+        msg: 'HeLLo WoRld'
+      },
+      // 定义局部的自定义指令
+      /* directives:{
+        'lower-text':function(el,binding){
+          // console.log(el,binding);
+          el.innerHTML = binding.value.toLowerCase()
+        }
+      }, */
+      directives:{
+        'lower-text':function(el,binding){
+          // console.log(el,binding);
+          el.innerHTML = binding.value.toLowerCase()
+        }
+      },
+    })
+    new Vue({
+      el:'#demo2',
+      data: {
+        news: 'HeLLo WoRld'
+      },
+      
+    })
+  </script>
+</body>
+</html>

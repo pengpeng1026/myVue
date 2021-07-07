@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- timeFilter是过滤器的名字 -->
+    <p>{{timeNow | timeFilter}}</p>
+  </div>
+  <!-- 建议使用dayjs，因为更轻量 -->
+  <!-- <script src="https://cdn.bootcdn.net/ajax/libs/moment.js/2.29.1/moment.js"></script> -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/dayjs/1.10.5/dayjs.min.js"></script>
+  <script src="./js/vue.js"></script>
+  <script>
+    // 过滤器
+    // 这里的value是data里面传递过来的数据，可以自己指定，或者不传的话就是当前时间
+    Vue.filter('timeFilter',(value) =>{
+      console.log(value);
+      return dayjs(value).format('YYYY-MM-DD HH:mm:ss')
+    })
+    new Vue({
+      el:'#app',
+      data: {
+        timeNow:Date.now(),
+      }
+    });
+  </script>
+</body>
+</html>

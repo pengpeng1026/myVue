@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <p>a.b:{{a.b}}</p>
+      <span>a.c:{{a.c}}</span><br />
+      <button @click="add">ding</button><br />
+      <button @click="remove">sahnchu</button>
+    </div>
+    <script src="./js/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          a: {
+            b: 123,
+          },
+        },
+        methods: {
+          add() {
+            if (!this.a.hasOwnProperty("c")) {
+              // this.a.c = 'abc'
+              // Vue.set(this.a, "c", "abc");
+              this.$set(this.a,'c','abc')
+            }
+          },
+          remove() {
+            // delete this.a.b
+            Vue.delete(this.a, "b");
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

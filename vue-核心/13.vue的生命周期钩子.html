@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h3 v-show="isShow">XXXXXXXX</h3>
+    <p ref='content'>天青色等烟雨{{isShow?'isshow是true':'isshow是false'}}</p>
+    <button @click="$destroy()">清除</button>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    new Vue({
+      el:'#app',
+      data:{
+        isShow: true
+      },
+      methods:{
+        toggle(){
+          this.isShow = !this.isShow
+        }
+      },
+      //生命周期钩子
+      /* 页面初始化之前,此时不能通过this读取data中的数据，不能调用methods中的方法 */
+      beforeCreate(){
+        console.log('beforeCreate------',this.isShow); //undefined
+      },
+      /* 页面初始化，此时可以通过this读取data中的数据，可以调用methods中的方法 */
+      created(){
+        console.log('created------',this.isShow)//可以读取到值
+        this.toggle() //成功调用methods中的方法，
+      },
+      /* 页面挂载前 此时无法通过ref获取对应的DOM元素*/
+      beforeMount(){
+        console.log('beforeMount------',this.$refs.content);//无法获取
+      },
+      /* 页面挂载完成，此时可以通过ref获取到对应的DOM元素，建议此时发送ajax请求或者启动异步任务 */
+      mounted(){
+        console.log('mounted------',this.$refs.content);
+        this.intervalId = setInterval(() => {
+          this.isShow = !this.isShow
+        },2000)
+      },
+      /* 页面更新之前，此时获取到的是更新之前的数据，看到的是老的界面 */
+      beforeUpdate(){
+        console.log('beforeUpdate-----',this.isShow,this.$refs.content.innerHTML);
+      },
+      /* 页面更新后，此时获取到的是更新后的数据，看到的是新界面 */
+      updated(){
+        console.log('updated------',this.isShow,this.$refs.content.innerHTML);
+      },
+      /* 在页面销毁前调用，做一些收尾工作，比如清除定时器 */
+      beforeDestroy(){
+        console.log('beforeDestroy------');
+        clearInterval(this.intervalId); 
+      },
+      /* 页面销毁后调用 */
+      destroyed(){
+        console.log('destroyed------');
+      }
+    })
+  </script>
+</body>
+</html>

@@ -8,18 +8,22 @@
 </head>
 <body>
   <div id="app">
-    <input type="text" v-model='msg'>
-    <p>hello {{msg}}</p>
-    <h3 @click="msg++">{{msg}}</h3>
+    <p>{{timeNow | filterName}}</p>
   </div>
   <script src="./js/vue.js"></script>
   <script>
+    // 过滤器，在数据展示之前处理一下数据
+    Vue.filter('filterName',(value) => {
+      console.log(value);
+      return 
+    })
     new Vue({
       el:'#app',
       data: {
-        msg: 0
+        timeNow:Date.now(),
+
       }
-    })
+    });
   </script>
 </body>
 </html>

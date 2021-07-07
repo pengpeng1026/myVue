@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <button @click="btn1">ding</button>
+    <!-- 传递一个普通参数 -->
+    <button @click="btn2('hello')">ding</button>
+    <!-- 传递一个参数和一个event  event对象固定写法$event-->
+    <button @click="btn3('world',$event)">ding</button>
+    <!-- 本质写法如下,高阶函数或者函数柯里化 -->
+    <button @click='($event) => {btn3("world",$event)}'>ding</button>
+    <!-- 
+      事件修饰符：
+        阻止事件默认行为：比如阻止a标签的转跳
+        阻止事件冒泡
+        只执行一次
+     -->
+     <!-- 此时可以打印输出，但是不能转跳了 -->
+     <a href="http://www.baidu.com" @click.prevent=test1>baidu</a>
+     <!-- 停止事件冒泡 -->
+     <div id="outer" style="width: 200px;height: 200px;background:teal" @click='test2'>
+       <div id="inner" style="width: 100px;height: 100px;background:#bfa" @click.stop='test3'></div>
+     </div>
+     <!-- 设置后只能点击一次 -->
+     <button @click.once='clickBtn'>点我</button>
+     <!-- 底层其实是点击过一次之后将按钮的事件监听给取消了 -->
+     <button @click='clickBtn1'>点我</button>
+
+     <!-- 按键修饰符 -->
+     <!-- 当点击了enter键触发这个事件，两种写法，第二种直接写对应的keyCode -->
+     <input type="text" v-model="msg" @keyup.enter="keyEvent">
+     <input type="text" v-model="msg" @keyup.13="keyEvent">
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    new Vue({
+      el:'#app',
+      data: {
+        msg: ''
+      },
+      methods:{
+        btn1(event){
+          console.log(event);
+        },
+        btn2(str){
+          console.log(str);
+        },
+        btn3(str,event){
+          console.log(str,event);
+        },
+        test1(){
+          console.log(111);
+        },
+        test2(){
+          console.log('outer');
+        },
+        test3(){
+          console.log('inner');
+        },
+        clickBtn(){
+          console.log('btn');
+        },
+        clickBtn1(){
+          console.log('btn------------');
+        },
+        keyEvent(event){
+          // console.log(event.keyCode);
+          console.log(this.msg + '------');
+        }
+      }
+    })
+  </script>
+</body>
+</html>
