@@ -14,7 +14,7 @@
     <script>
       Vue.component("button-content", {
         props: ["author", "title", "price"],
-        template: "<p>{{title}}</p>",
+        template: "<p>{{title}}--{{price}}--{{author}}</p>",
       });
       new Vue({
         el: "#app",

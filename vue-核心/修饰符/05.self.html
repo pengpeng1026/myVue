@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- .self修饰符，事件触发时只有绑定的对象才生效 -->
+    <div id="outer" style="width: 200px; height:200px;background:teal" @click.self="test1(1)">
+      <div id="inner" style="width: 100px; height:100px;background:red" @click="test1(2)"></div>
+    </div>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    new Vue({
+      el:'#app',
+      data: {
+        msg: ''
+      },
+      methods:{
+        test1(num){
+          console.log(num);
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 事件默认是冒泡，使用capture修饰符可以改变为捕获 注意事件捕获的修饰符要加给从开始捕获的元素-->
+    <div id="outer" style="width: 200px; height:200px;background:teal" @click.capture="test1(1)">
+      <div id="inner" style="width: 100px; height:100px;background:red" @click="test1(2)"></div>
+    </div>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    new Vue({
+      el:'#app',
+      data: {
+        msg: ''
+      },
+      methods:{
+        test1(num){
+          console.log(num);
+        }
+      }
+    })
+  </script>
+</body>
+</html>
