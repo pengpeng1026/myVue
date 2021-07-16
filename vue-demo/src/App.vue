@@ -1,18 +1,25 @@
 <template>
-  <div class="container">
-    <Search></Search>
-    <Main></Main>
+  <div>
+    <p>click {{counter}} times,counter is {{evenOrOdd}}</p>
+    <button @click="increment">increment</button>
+    <button @click="decrement">decrement</button>
+    <button @click="incrementIfOdd">increment if odd</button>
+    <button @click="incrementAsync">increment async</button>
   </div>
 </template>
 
 <script>
-import Search from './components/Search'
-import Main from './components/Main'
+import {mapState,mapMutations,mapActions,mapGetters} from 'vuex'
 export default {
   name: 'App',
-  components:{
-    Search,
-    Main
+ 
+  methods:{
+    ...mapMutations(['increment','decrement']),
+    ...mapActions(['incrementIfOdd','incrementAsync'])
+  },
+  computed:{
+    ...mapState(['counter']),
+    ...mapGetters(['evenOrOdd'])
   }
 }
 </script>

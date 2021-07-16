@@ -20,7 +20,7 @@
       }
     },
     mounted(){
-      // $refs.ding中的ding 是在绑定ref的时候写的关键字
+      // $refs.ding中的ding 是在绑定ref的时候写的标识
       this.$refs.demo.$on('cao',this.test)
     }
   }

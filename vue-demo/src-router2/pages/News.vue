@@ -1,0 +1,19 @@
+<template>
+  <div>
+    <ul>
+      <li>news01</li>
+      <li>news02</li>
+      <li>news03</li>
+    </ul>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'News',
+}
+</script>
+
+<style scoped>
+
+</style>
